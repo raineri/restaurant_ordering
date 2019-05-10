@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<style>
+@import url(/css/bootstrap.css);
+</style>
+</head>
+<body>	
+<div class="container" style="margin-top: 10px; margin-bottom: 40px;">
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <!-- brand class is from bootstrap.css  -->
+            <a class="brand" href="/shop/index/{% block shop_id %}{% endblock %}">{% block store_name %}Koku{% endblock %}</a>
+			
+            <div class="nav-collapse">
+				{% if session.get('user', None) == None %}
+                <ul class="nav">
+                    <li {% block is_home %}{% endblock %}><a href="/shop/index/{{ self.shop_id() }}"><i class="icon-home"></i> {{ load_var(session['shop']).title }}</a></li>
+					<li {% block is_menu %}{% endblock %}><a href="/shop/menu/{{ self.shop_id() }}"><i class="icon-list"></i> Menu</a></li>
+					<li {% block is_about %}{% endblock %}><a href="/shop/about/{{ self.shop_id() }}"><i class="icon-info-sign"></i> About</b></a></li>
+                    <li {% block is_login %}{% endblock %}><a href="/login">Login</a></li>
+					<li {% block is_signup %}{% endblock %}><a href="/signup?shop_id={{ self.shop_id() }}">Signup</a></li>
+					
+					{% block is_profile %}{% endblock %}
+					
+                </ul>
+ 				<ul class="nav pull-right"><li {% block is_shopping_cart %}{% endblock %}><a href="/cart/view/{{ self.shop_id() }}"><i class="icon-shopping-cart"></i> Shopping Cart ({% block cart_total_items %}{{ load_var(session['shopping_cart']).num_of_items() }}{% endblock %})</a></li></ul>
+				{% else %}
+				<ul class="nav">
+                    <li {{ self.is_home() }}><a href="/shop/index/{{ self.shop_id() }}"><i class="icon-home"></i> {{ load_var(session['shop']).title }}</a></li>
+					<li {{ self.is_menu() }}><a href="/shop/menu/{{ self.shop_id() }}"><i class="icon-list"></i> Menu</a></li>
+					<li {{ self.is_about() }}><a href="/shop/about/{{ self.shop_id() }}"><i class="icon-info-sign"></i> About</b></a></li>			
+                </ul>
+				<ul class="nav pull-right">
+					<li class="dropdown" {% block is_user %}{% endblock %}><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> {{ session['user'].first_name }} <b class="caret"></b></a>
+					  <ul class="dropdown-menu">
+                          <li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
+						  <li><a href="/order/index"><i class="icon-book"></i> Order History</a></li>
+                          <li><a href="/help/support"><i class="icon-envelope"></i> Contact Support</a></li>
+                          <li class="divider"></li>
+                          <li><a href="/logout"><i class="icon-off"></i> Logout</a></li>
+                      </ul>
+                  </li>
+					<li {{ self.is_shopping_cart() }}><a href="/cart/view/{{ self.shop_id() }}" id="example" rel="popover" data-content="It's so simple to create a tooltop for my website!"><i class="icon-shopping-cart"></i> View Cart ({{ self.cart_total_items() }})</a></li>
+					
+					{% block order_tag %}{% endblock %}
+					
+				
+					</ul>
+				{% endif %}
+			
+            </div><!-- /.nav-collapse -->
+        </div>
+    </div><!-- /navbar-inner -->
+</div><!-- /navbar -->
+
+{% block content %}{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap-tooltip.js"></script>
+<script>
+$(function ()
+{ $("#example").popover({placement:'bottom', trigger:'hover'});
+});
+</script>
+
+</div>
+</body>
+</html>

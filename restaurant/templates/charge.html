@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop'].shop_id }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li ><a href="/active_order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+
+{% block is_shopping_cart %}
+    class="active"
+{% endblock %}
+
+{% block content %}
+<div class="row">
+     <div class="span12">
+		<div class="alert alert-success">
+		  You have been charged <b>{{ format_price(amount) }}</b>
+		</div>
+	</div>
+ </div>
+{% endblock %}

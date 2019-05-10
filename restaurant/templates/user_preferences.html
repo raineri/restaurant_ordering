@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop_id'] }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li ><a href="/active_order/order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="bs-docs-example">
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
+              <li><a href="#profile" data-toggle="tab">Delivery Address</a></li>
+			  <li><a href="#profile" data-toggle="tab">Billing Information</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade active in" id="home">
+
+
+				<form class="form-horizontal" action='' method="POST">
+				  <fieldset>
+				    <div class="control-group">
+				      <!-- Username -->
+				      <label class="control-label"  for="email">E-mail</label>
+				      <div class="controls">
+				        <span>{{ session['user'].email }}</span>
+				      </div>
+				    </div>
+
+				    <div class="control-group">
+				      <!-- Username -->
+				      <label class="control-label"  for="password">Password</label>
+				      <div class="controls">
+				        <span><a href="#">Change</a></span>
+				      </div>
+				    </div>
+				
+					<div class="control-group">
+					      <!-- Username -->
+					      <label class="control-label"  for="username">First Name</label>
+					      <div class="controls">
+					        <input type="text" id="username" name="username" placeholder="{{ session['user'].first_name }}" class="input-xlarge">
+					      </div>
+					    </div>
+					
+					<div class="control-group">
+					      <!-- Username -->
+					      <label class="control-label"  for="username">Last Name</label>
+					      <div class="controls">
+					        <input type="text" id="username" name="username" placeholder="{{ session['user'].last_name }}" class="input-xlarge">
+					      </div>
+					    </div>
+
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-success">Update</button>
+				      </div>
+				    </div>
+				  </fieldset>
+				</form>                
+
+
+
+
+
+              </div>
+              <div class="tab-pane fade" id="profile">
+	
+	
+	
+					<form class="form-horizontal" action='' method="POST">
+					  <fieldset>
+
+						<div class="control-group">
+						      <!-- Username -->
+						      <label class="control-label"  for="username">Phone Number</label>
+						      <div class="controls">
+						        <input type="text" id="username" name="username" placeholder="{{ session['user'].phone_number }}" class="input-xlarge">
+						      </div>
+						    </div>
+
+						<div class="control-group">
+						      <!-- Username -->
+						      <label class="control-label"  for="username">Address</label>
+						      <div class="controls">
+						        <input type="text" id="username" name="username" placeholder="{{ session['user'].address1 }}" class="input-xlarge">
+						      </div>
+						    </div>
+
+					    <div class="control-group">
+					      <!-- Button -->
+					      <div class="controls">
+					        <button class="btn btn-success">Update</button>
+					      </div>
+					    </div>
+					  </fieldset>
+					</form>
+					
+					
+              </div>
+              </div>
+            </div>
+          </div>
+ 
+<script>
+  $(function () {
+    $('#myTab a:last').tab('show');
+  })
+</script>
+{% endblock %}

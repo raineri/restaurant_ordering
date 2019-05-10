@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop'].shop_id }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li ><a href="/active_order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+{% block is_user %}
+    class="active"
+{% endblock %}
+
+{% block content %}
+<div class="row">
+     <div class="span8">
+		<h2>Your Orders</h2>
+		<table class="table table-condensed">
+		  <colgroup>
+			   <col span="1" style="width: 25%;">
+			   <col span="1" style="width: 65%;">
+			   <col span="1" style="width: 10%;">
+		  </colgroup>
+		  <thead>
+		    <tr>
+			  <th>Date</th>
+		      <th>Description</th>
+			  <th>Total</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+				{% for order in Order.query.filter_by(user_id=session['user'].user_id).order_by(models.Order.date.desc()) %}
+		    	<tr>
+					<td>{{ order.get_date() }}</td>
+		      		<td><a href="/order/view/{{ base62_encode(int('%s%s' % (order.order_id, '000000'))) }}">Order #{{ base62_encode(int('%s%s' % (order.order_id, '000000'))) }}</a></td>
+		      		<td>{{ format_price(order.total_cost/100.0) }}</td>
+		    	</tr>
+				{% endfor %}
+		  </tbody>
+		</table>
+     </div>
+	
+ </div>
+{% endblock %}

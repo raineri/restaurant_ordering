@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop_id'] }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li ><a href="/active_order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+{% block is_signup %}
+    class="active"
+{% endblock %}
+
+{% block content %}
+<h1>Signup</h1>
+{% if commit_success %}
+<div class="alert alert-success">
+  Yes! You've registered your account.
+</div>
+{% else %}
+
+{% if error %}
+<div class="row">
+	<div class="span8">
+		<div class="alert alert-error">
+  		Could not register the account. Recheck your input.
+		</div>
+	</div>
+</div>
+{% endif %}
+
+<div class="row">
+	
+     <div class="span4">
+         <form class="form-horizontal" method="post" action="/signup">
+		  <div class="control-group">
+		    <label class="control-label" for="email">Email</label>
+		    <div class="controls">
+		      <input type="text" id="email" name="email" placeholder="Email">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="password">Password</label>
+		    <div class="controls">
+		      <input type="password" id="password" name="password" placeholder="Password">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="first_name">First Name</label>
+		    <div class="controls">
+		      <input type="text" id="first_name" name="first_name" placeholder="First Name">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="last_name">Last Name</label>
+		    <div class="controls">
+		      <input type="text" id="last_name" name="last_name" placeholder="Last Name">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="last_name">Phone Number</label>
+		    <div class="controls">
+		      <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="last_name">Address 1</label>
+		    <div class="controls">
+		      <input type="text" id="address1" name="address1" placeholder="Address 1">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="last_name">Address 2</label>
+		    <div class="controls">
+		      <input type="text" id="address2" name="address2" placeholder="Address 2">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <div class="controls">
+			  <input type="hidden" id="shop_id" name="shop_id" value="{% if session['session_shop'] %}/shop/{{ session['session_shop'] }}{% endif %}" placeholder="Email">
+		      <button type="submit" class="btn">Register</button>
+		    </div>
+		  </div>
+		</form>
+     </div>
+	</div>
+	
+     </div>
+     <div class="span4">
+     </div>
+ </div>
+{% endif %}
+</div>
+{% endblock %}

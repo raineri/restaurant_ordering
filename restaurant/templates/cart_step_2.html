@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop'].shop_id }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li ><a href="/active_order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+{% block is_shopping_cart %}
+    class="active"
+{% endblock %}
+
+{% block content %}
+<div class="row">
+     <div class="span8">
+         <h2>Shopping Cart</h2>
+		</div></div>
+		<div class="row">
+		     <div class="span8">
+		<p>Currently ordering from <b>{{ session['shop'].title }}</b></p>
+		
+		<ul class="breadcrumb">
+		  <li class="active">1. Order from the Menu <span class="divider">/</span></li>
+		  <li><b>2. Enter Your Info</b> <span class="divider">/</span></li>
+		  <li class="active">3. Checkout</li>
+		</ul>
+						
+						
+						
+						<form class="form-horizontal" action='' method="POST">
+						  <fieldset>
+							<div id="legend">
+							      <legend class="">Delivery Address</legend>
+							    </div>
+							
+								<div class="control-group">
+								      <!-- Username -->
+								      <label class="control-label"  for="username">First Name</label>
+								      <div class="controls">
+								        <input type="text" id="username" name="username" placeholder="{{ session['user'].first_name }}" class="input-xlarge">
+								      </div>
+								    </div>
+								
+									<div class="control-group">
+									      <!-- Username -->
+									      <label class="control-label"  for="username">Last Name</label>
+									      <div class="controls">
+									        <input type="text" id="username" name="username" placeholder="{{ session['user'].last_name }}" class="input-xlarge">
+									      </div>
+									    </div>
+										
+							<div class="control-group">
+							      <!-- Username -->
+							      <label class="control-label"  for="username">Address</label>
+							      <div class="controls">
+							        <input type="text" id="username" name="username" placeholder="{{ session['user'].address1 }}" class="input-xlarge">
+							      </div>
+							    </div>
+							
+								<div class="control-group">
+								      <!-- Username -->
+								      <label class="control-label"  for="username">Phone Number</label>
+								      <div class="controls">
+								        <input type="text" id="username" name="username" placeholder="{{ session['user'].phone_number }}" class="input-xlarge">
+								      </div>
+								    </div>
+
+						  </fieldset>
+						</form>
+		
+		
+		
+		<div><a href="/cart/step/3" class="btn btn-success pull-right" style="margin-left: 5px;">Continue</a> <a href="/cart/view/{{ session['shop'].shop_id }}" class="btn  pull-right">Back</a></div>
+     </div>
+	<div class="span4"><span style="font-size: 18px; text-align:right;">Side Panel</span>
+		</div>
+ </div>
+{% endblock %}

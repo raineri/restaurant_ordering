@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop_id'] }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li ><a href="/active_order/order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+{% block is_about %}
+    class="active"
+{% endblock %}
+
+{% block content %}
+<h1>About</h1>
+<p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum. Aenean molestie velit sed lectus placerat malesuada.</p>
+{% endblock %}

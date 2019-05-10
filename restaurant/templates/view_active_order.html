@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop'].shop_id }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li class="active"><a href="/active_order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+     <div class="span8">
+		{% if charge %}
+		<div class="alert alert-success">
+		  You have been charged <b>{{ format_price(amount/100.0) }}</b>
+		</div>
+		{% endif%}
+		<h2>Order #{{ session['order_id'] }}</h2>
+		
+		<table class="table table-condensed">
+		  <colgroup>
+			   <col span="1" style="width: 20%;">
+			   <col span="1" style="width: 80%;">
+		  </colgroup>
+		  <thead>
+		    <tr>
+		      <th></th>
+			  <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    	<tr>
+		      		<td>Date</td>
+		      		<td>{{ order.get_date() }}</td>
+		    	</tr>
+				<tr>
+		      		<td>Total Cost</td>
+		      		<td>{{ format_price(order.total_cost/100.0) }}</td>
+		    	</tr>
+				<tr>
+		      		<td>Restaurant</td>
+		      		<td>{{ shop.title }}</td>
+		    	</tr>
+		  </tbody>
+		</table>
+		
+     </div>
+	
+ </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop_id'] }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li ><a href="/active_order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+{% block is_home %}
+    class="active"
+{% endblock %}
+
+{% block content %}
+<h1>{{ shop.title }}</h1>
+<div class="row">
+     <div class="span4">
+         <h2>Column 1</h2>
+		 <h5>Category</h5>
+		 <img src="http://www.placehold.it/120x120" class="img-polaroid" style="float: left; margin-right: 8px;">
+         <p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum. Aenean molestie velit sed lectus placerat malesuada.
+         </p>
+		<h3>$8</h3>
+         <p><a class="btn btn-inverse btn-large" href="#">Order</a></p>
+     </div>
+     <div class="span4">
+         <h2>Column 1</h2>
+		 <h5>Category</h5>
+		 <img src="http://www.placehold.it/120x120" class="img-polaroid" style="float: left; margin-right: 8px;">
+         <p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum. Aenean molestie velit sed lectus placerat malesuada.
+         </p>
+		<h3>$8</h3>
+<p><a class="btn btn-info btn-large" href="#">Order</a></p>
+     </div>
+     <div class="span4">
+         <h2>Column 1</h2>
+		 <h5>Category</h5>
+		 <img src="http://www.placehold.it/120x120" class="img-polaroid" style="float: left; margin-right: 8px;">
+         <p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum. Aenean molestie velit sed lectus placerat malesuada.
+         </p>
+		<h3>$8</h3>
+         <p><a class="btn btn-success btn-large" href="#">Order</a></p>
+     </div>
+ </div>
+<div class="row">
+     <div class="span4">
+         <h2>Column 1</h2>
+		 <h5>Category</h5>
+		 <img src="http://www.placehold.it/120x120" class="img-polaroid" style="float: left; margin-right: 8px;">
+         <p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum. Aenean molestie velit sed lectus placerat malesuada.
+         </p>
+		<h3>$8</h3>
+         <p><a class="btn btn-inverse btn-large" href="#">Order</a></p>
+     </div>
+     <div class="span4">
+         <h2>Column 1</h2>
+		 <h5>Category</h5>
+		 <img src="http://www.placehold.it/120x120" class="img-polaroid" style="float: left; margin-right: 8px;">
+         <p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum. Aenean molestie velit sed lectus placerat malesuada.
+         </p>
+		<h3>$8</h3>
+<p><a class="btn btn-info btn-large" href="#">Order</a></p>
+     </div>
+     <div class="span4">
+         <h2>Column 1</h2>
+		 <h5>Category</h5>
+		 <img src="http://www.placehold.it/120x120" class="img-polaroid" style="float: left; margin-right: 8px;">
+         <p>Morbi fringilla, arcu et pharetra ornare, arcu dolor tincidunt erat, non ornare nisl diam vitae orci. Nulla eu eros non ligula luctus aliquet. Morbi tempus laoreet urna, nec aliquam odio dapibus at. Nam in libero ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et libero eu tortor eleifend vestibulum. Aenean molestie velit sed lectus placerat malesuada.
+         </p>
+		<h3>$8</h3>
+         <p><a class="btn btn-success btn-large" href="#">Order</a></p>
+     </div>
+ </div>
+</div>
+{% endblock %}

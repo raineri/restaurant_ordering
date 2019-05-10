@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop_id'] }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li ><a href="/active_order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+{% block is_menu %}
+    class="active"
+{% endblock %}
+
+{% block content %}
+
+<h1>Menu</h1>
+<div class="row">
+     <div class="span8">
+         <h3>{{ category_name }}</h3>
+		 <table class="table table-condensed">
+			<colgroup>
+				   <col span="1" style="width: 75%;">
+				   <col span="1" style="width: 10%;">
+				   <col span="1" style="width: 4%;">
+			  </colgroup>
+		  <tbody>
+			{% for dish in dishes %}
+		    <tr>
+		      <td><a href="/shop/{{ shop_id }}/dish/{{dish.dish_id}}">{{ dish.name }}</td>
+		      <td>{{ format_price(dish.price_dollars()) }}</td>
+		    </tr>
+			{% endfor %}
+		  </tbody>
+		</table>
+     </div>
+ </div>
+</div>
+{% endblock %}

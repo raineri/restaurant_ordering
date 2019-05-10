@@ -1,0 +1,33 @@
+{% extends "base_admin.html" %}
+
+{% block content %}	
+<div class="container">
+	<div class="row">
+		<div class="span10 offset1 well">
+			<legend>Dashboard</legend>
+			{% if error == True %}
+          	<div class="alert alert-error">
+                <a class="close" data-dismiss="alert" href="#">×</a>Incorrect Username or Password!
+            </div>
+			{% endif %}
+			
+			<div class="navbar">
+			    <div class="navbar-inner">
+			        <div class="container">
+			            <!-- brand class is from bootstrap.css  -->
+			            <div class="nav-collapse">
+			                <ul class="nav">
+			                    <li><a href="/admin/billing"><i></i> Statistics</a></li>
+								<li><a href="/admin/billing"><i></i> Billing</a></li>
+								<li><a href="/admin/billing"><i></i> Settings</a></li>
+								<li><a href="/admin/billing"><i class="icon-home"></i> test</a></li>
+			                </ul>
+			            </div><!-- /.nav-collapse -->
+			        </div>
+			    </div><!-- /navbar-inner -->
+			</div><!-- /navbar -->
+			<a href="/admin/billing">Billing</a><br>  
+		</div>
+	</div>
+</div>
+{% endblock %}

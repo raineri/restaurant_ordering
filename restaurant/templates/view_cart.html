@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop'].shop_id }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li ><a href="/active_order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+{% block is_shopping_cart %}
+    class="active"
+{% endblock %}
+
+{% block content %}
+<div class="row">
+     <div class="span8">
+		{% if load_var(session['shopping_cart']).has_items() %}
+		<p>Currently ordering from <b>{{ load_var(session['shop']).title }}</b></p>
+		<ul class="breadcrumb">
+		  <li><b>1. Order from the Menu</b> <span class="divider">/</span></li>
+		  <li class="active">2. Enter Your Info <span class="divider">/</span></li>
+		  <li class="active">3. Checkout</li>
+		</ul>
+		<h3>Shopping Cart</h3>
+		 <table class="table table-bordered">
+		  <colgroup>
+			   <col span="1" style="width: 85%;">
+			   <col span="1" style="width: 10%;">
+			   <col span="1" style="width: 5%;">
+		  </colgroup>
+		  <thead>
+		    <tr>
+		      <th>item</th>
+			  <th>price</th>
+			  <th></th>
+			  
+		    </tr>
+		  </thead>
+		  <tbody>
+				{% for item in load_var(session['shopping_cart']).items %}
+		    	<tr>
+		      		<td><a href="/shop/{{ load_var(session['shop']).shop_id }}/dish/{{ item.dish.dish_id }}" rel="tooltip" data-placement="top" data-original-title="Tooltip on top">{{ item.dish.name }}</a></td>
+		      		<td>{{ format_price(item.price_dollars()) }}</td>
+					<td><a href="/cart/remove/{{ item.id }}"><i class="icon-remove"></i></a></td>
+					
+		    	</tr>
+				{% endfor %}
+		  </tbody>
+		</table>
+		
+		<table class="table table-bordered">
+		  <colgroup>
+			   <col span="1" style="width: 100%;">
+		  </colgroup>
+		  <tbody>
+		    	<tr>
+		      		<td style="text-align:center; font-size:18px;">Your total is <b>{{ format_price(load_var(session['shopping_cart']).price_dollars()) }}</b></td>
+		    	</tr>
+		  </tbody>
+		</table>
+		
+		<div><a href="/cart/step/2" class="btn btn-success pull-right">Next</a></div>
+		{% else %}
+			<h3>Shopping Cart</h3>
+			No items in cart.
+		{% endif %}
+     </div>
+	
+ </div>
+{% endblock %}

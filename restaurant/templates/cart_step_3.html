@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block shop_id %}{{ session['shop'].shop_id }}{% endblock %}
+
+{% block order_tag %}
+{% if session.get('order_id', None) != None %}
+<li ><a href="/active_order/view/{{ session['order_id'] }}"><i class="icon-question-sign"></i> Order #{{ session['order_id'] }}</a></li>
+{% endif %}
+{% endblock %}
+
+
+{% block is_shopping_cart %}
+    class="active"
+{% endblock %}
+
+{% block content %}
+<div class="row">
+     <div class="span8">
+		</div></div>
+		<div class="row">
+		     <div class="span8">
+		<p>Currently ordering from <b>{{ session['shop'].title }}</b></p>
+		
+		<ul class="breadcrumb">
+		  <li class="active">1. Order from the Menu <span class="divider">/</span></li>
+		  <li class="active">2. Enter Your Info <span class="divider">/</span></li>
+		  <li><b>3. Checkout</b></li>
+		</ul>
+	
+		<h2>Review your order</h2>
+		<table class="table table-condensed">
+		  <colgroup>
+			   <col span="1" style="width: 85%;">
+			   <col span="1" style="width: 15%;">
+		  </colgroup>
+		  <thead>
+		    <tr>
+		      <th><h4>Your Order</h4></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+				{% for item in session['shopping_cart'].items %}
+		    	<tr>
+		      		<td>{{ item.dish.name }}</td>
+		      		<td>{{ format_price(item.price_dollars()) }}</td>
+		    	</tr>
+				{% endfor %}
+				<tr>
+					<td><h4>Total</h4></td>
+					<td><h4>{{ format_price(session['shopping_cart'].price_dollars()) }}</h4></td>
+				</tr>
+		  </tbody>
+		</table>
+		<h4>Delivery Address</h4>
+		
+		<table class="table table-condensed">
+		  <colgroup>
+			   <col span="1" style="width: 20%;">
+			   <col span="1" style="width: 80%;">
+		  </colgroup>
+		  <thead>
+		    <tr>
+		      <th></th>
+			  <th></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    	<tr>
+		      		<td>Phone</td>
+		      		<td>{{ session['user'].phone_number }}</td>
+		    	</tr>
+				<tr>
+		      		<td>Address</td>
+		      		<td>{{ session['user'].address1 }}</td>
+		    	</tr>
+		  </tbody>
+		</table>
+		
+		<br />
+		
+		<form action="/charge" method="post">
+			<script src="https://button.stripe.com/v1/button.js" class="stripe-button"
+			          data-key="{{ key }}"
+			          data-amount="{{ session['shopping_cart'].total_price() }}"></script>
+		</form>
+		
+     </div>
+	<div class="span4"><span style="font-size: 18px; text-align:right;">Side Panel</span>
+		</div>
+ </div>
+{% endblock %}
