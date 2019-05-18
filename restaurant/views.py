@@ -281,8 +281,8 @@ def charge_card():
 	# Download the library from twilio.com/docs/libraries
 	from twilio.rest import TwilioRestClient
 	# Get these credentials from http://twilio.com/user/account
-	account_sid = "ACca9d9c4c7ebab4479017e7ede6af6eb9"
-	auth_token = "d2761550351f37f3d229948a24a39d12"
+	account_sid = "XXX"
+	auth_token = "YYY"
 	client = TwilioRestClient(account_sid, auth_token)
 	call = client.calls.create(to="+13479618623",  # Any phone number
 	                           from_="+13475146625", # Must be a valid Twilio number
